@@ -8,18 +8,31 @@ import { ListService } from '../services/list.service';
   styleUrls: ['./add-list.component.css']
 })
 export class AddListComponent implements OnInit {
-  private newList :List;
+  private newList: List;
+  private lists: List[];
   @Output() addList: EventEmitter<List> = new EventEmitter<List>();
   constructor(private listServ: ListService) { }
  
   ngOnInit() {
-  	this.newList = {
-  		title: '',
-  		category:'',
-  		description:'',
-  		_id:''
+  	//this.newList = {
+  	//	title: '',
+  	//	category:'',
+  	//	description:'',
+  	//	_id:''
 
-  	}
+   //     }
+    this.getList();
+
+  }
+
+  public getList() {
+    //Get all lists from server and update the lists property
+    //this.listServ.getAllLists().subscribe(
+    //  response => this.lists = response)
+
+    this.listServ.getAllLists().subscribe(result => {
+      this.lists = result;
+    }, error => console.error(error));
   }
 
   public onSubmit() {

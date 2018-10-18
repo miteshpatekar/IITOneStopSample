@@ -7,20 +7,23 @@ import { AppComponent } from './app.component';
 import { AddListComponent } from './add-list/add-list.component';
 import { ViewListComponent } from './view-list/view-list.component';
 import { ListService } from './services/list.service';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 @NgModule({
 
   //Components are added here
   declarations: [
     AppComponent,  
     AddListComponent,
-    ViewListComponent
+    ViewListComponent 
   ],
   //All the modules are declared as imports
   imports: [
   
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule
   ],
   //All the services go here.
   providers: [ListService],
