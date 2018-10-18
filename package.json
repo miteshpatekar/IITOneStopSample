@@ -1,7 +1,7 @@
 {
-  "name": "awesome-bucketlist",
+  "name": "OneStopIITDataRegulation",
   "version": "1.0.0",
-  "description": "A simple bucketlist app using MEAN stack",
+  "description": "A simple bucketlist app to manage data in iit one stop using MEAN stack",
   "main": "app.js",
   "scripts": {
     "start": "node app"
@@ -21,7 +21,7 @@
     "Angular",
     "MEAN"
   ],
-  "author": "Manjunath",
+  "author": "Pooja Gupta",
   "license": "ISC",
   "devDependencies": {
     "@angular/cli": "^6.2.5"

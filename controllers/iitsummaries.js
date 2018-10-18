@@ -1,12 +1,26 @@
 //Require the express package and use express.Router()
 const express = require('express');
 const router = express.Router();
-const bucketlist = require('../models/List');
+const iitsummaries = require('../models/List');
 
 
 //GET HTTP method to /bucketlist
+router.get('/init', (req, res) => {
+    iitsummaries.getAllLists((err, lists) => {
+        if (err) {
+            res.json({ success: false, message: `Failed to load all lists. Error: ${err}` });
+        }
+        else {
+            res.write(JSON.stringify({ success: true, lists: lists }, null, 2));
+            res.end();
+
+        }
+    });
+});
+
+//GET HTTP method to /bucketlist
 router.get('/',(req,res) => {
-	bucketlist.getAllLists((err, lists)=> {
+    iitsummaries.getAllLists((err, lists)=> {
 		if(err) {
 			res.json({success:false, message: `Failed to load all lists. Error: ${err}`});
 		}
@@ -16,6 +30,7 @@ router.get('/',(req,res) => {
 			
 	}	
 	});
+
 });
 
 
@@ -23,12 +38,15 @@ router.get('/',(req,res) => {
 
 router.post('/', (req,res,next) => {
 	console.log(req.body);
-	let newList = new bucketlist({
+    let newList = new iitsummaries({
 		title: req.body.title,
 		description: req.body.description,
-		category: req.body.category
+        url: req.body.url,
+        content: req.body.content,
+        doctype: req.body.doctype
+
 	});
-	bucketlist.addList(newList,(err, list) => {
+    iitsummaries.addList(newList,(err, list) => {
 		if(err) {
 			res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
 
@@ -44,7 +62,7 @@ router.post('/', (req,res,next) => {
 router.delete('/:id', (req,res,next)=> {
 	let id = req.params.id;
 	console.log(id);
-	bucketlist.deleteListById(id,(err,list) => {
+    iitsummaries.deleteListById(id,(err,list) => {
 		if(err) {
 			res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
 		}
