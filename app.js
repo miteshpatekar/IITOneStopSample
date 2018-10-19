@@ -8,7 +8,7 @@ const config = require('./config/database');
 const iitsummaries = require('./controllers/iitsummaries');
 
 //Connect mongoose to our database
-mongoose.connect(config.database);
+mongoose.connect(config.database, { useNewUrlParser: true });
 
 //Declaring Port
 const port = 3000;
