@@ -12,10 +12,8 @@ export class ListService {
 
     private serverApi= 'http://localhost:3000';
 
-    
+
     public getAllLists():Observable<List[]> {
-        
-      
       let URI = `${this.serverApi}/iitsummaries/`;
         return this.http.get(URI)
             .map(res => res.json())
@@ -28,6 +26,15 @@ export class ListService {
         headers.append('Content-Type', 'application/json');
         return this.http.delete(URI, {headers: headers})
         .map(res => res.json());
+    }
+
+    public get(listId : string):Observable<List> {
+      let URI = `${this.serverApi}/iitsummaries/${listId}`;
+        let headers = new Headers;
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(URI)
+        .map(res => res.json())
+        .map(res => <List>res.item);
     }
 
     	public addList(list: List) {

@@ -40,7 +40,7 @@ export class AddListComponent implements OnInit {
   	console.log(this.newList.category);
   	this.listServ.addList(this.newList).subscribe(
   		response=> {
-  			
+
   			if(response.success== true)
   				this.addList.emit(this.newList);
   		},

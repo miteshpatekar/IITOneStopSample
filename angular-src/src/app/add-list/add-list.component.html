@@ -1,51 +1,21 @@
-<!--Navbar-->
-<nav class="navbar navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">IIT OneStop</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About <span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" id="search" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
-  </div>
-</nav>
-
-<!--/.Navbar-->
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <form>
         <div class="form-group">
           <br>
-          <input [(ngModel)]="searchText" name="searchDoc" type="text" id="search" aria-describedby="searchDoc" placeholder="Search">
-          <span><i class="fa fa-search search-icon"></i></span>
-          <!-- <p>Search icon on a styled link button:
-          <a href="#" class="btn btn-info btn-lg">
-            <span class="glyphicon glyphicon-search"></span> Search
-          </a> -->
-          <!-- </p> -->
+          <input [(ngModel)]="searchText"  name="searchDoc" type="text" id="search" aria-describedby="searchDoc" placeholder="Search">
+          <span><i  class="fa fa-search search-icon"></i></span>
         </div>
       </form>
     </div>
   </div>
-
   <router-outlet></router-outlet>
-  <div class="list-group" *ngFor="let item of lists | filter: searchText" [routerLink]="['/details', item._id]">
+  <div class="list-group" *ngFor="let item of lists | filter: searchText">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">{{item.title}}</h5>
-        <small>3 days ago</small>
+        <a [routerLink]="['/details', item._id]">{{item.title}}</a>
       </div>
       <p class="mb-1">{{item.description}}</p>
       <small>{{item.content}}</small>

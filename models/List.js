@@ -11,7 +11,7 @@ const iitsummariesSchema = mongoose.Schema({
     description: String,
     url: String,
     doctype: String,
-    content:String    
+    content:String
 });
 
 //Create a model using mongoose.model and export it
@@ -35,6 +35,12 @@ module.exports.deleteListById = (id, callback) => {
     iitsummaries.remove(query, callback);
 }
 
+//We pass on an id and remove it from DB using Bucketlist.remove()
+module.exports.getListById = (id, callback) => {
+	let query = {_id: id};
+  iitsummaries.findOne({_id: id}, callback);
+}
+
 module.exports.getJsonData = () => {
     var data = [{
         "title": "testdoc",
@@ -45,4 +51,3 @@ module.exports.getJsonData = () => {
     }];
     return data;
 }
-
