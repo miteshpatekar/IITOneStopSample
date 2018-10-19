@@ -26,9 +26,9 @@ router.get('/',(req,res) => {
 		}
 		else {
 			res.write(JSON.stringify({success: true, lists:lists},null,2));
-			res.end();	
-			
-	}	
+			res.end();
+
+	}
 	});
 
 });
@@ -51,9 +51,9 @@ router.post('/', (req,res,next) => {
 			res.json({success: false, message: `Failed to create a new list. Error: ${err}`});
 
 		}
-		else 
+		else
 			res.json({success:true, message: "Added successfully."});
-	
+
 	});
 });
 
@@ -68,6 +68,23 @@ router.delete('/:id', (req,res,next)=> {
 		}
 		else if(list) {
 			res.json({success:true, message: "Deleted successfully"});
+		}
+		else
+			res.json({success:false});
+	})
+});
+
+//Get HTTP method to /bucketlist. Here, we pass in a params which is the object id.
+router.get('/:id', (req,res,next)=> {
+	let id = req.params.id;
+	console.log(id);
+    iitsummaries.getListById(id,(err,list) => {
+		if(err) {
+			res.json({success:false, message: `Failed to delete the list. Error: ${err}`});
+		}
+		else if(list) {
+      res.write(JSON.stringify({success: true, item:list},null,2));
+      res.end();
 		}
 		else
 			res.json({success:false});
