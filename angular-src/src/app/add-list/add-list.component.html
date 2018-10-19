@@ -1,4 +1,3 @@
-
 <!--Navbar-->
 <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">IIT OneStop</a>
@@ -29,24 +28,23 @@
       <form>
         <div class="form-group">
           <br>
-          <input [(ngModel)]="searchText"  name="searchDoc" type="text" id="search" aria-describedby="searchDoc" placeholder="Search">
-          <span><i  class="fa fa-search search-icon"></i></span>
+          <input [(ngModel)]="searchText" name="searchDoc" type="text" id="search" aria-describedby="searchDoc" placeholder="Search">
+          <span><i class="fa fa-search search-icon"></i></span>
           <!-- <p>Search icon on a styled link button:
-        <a href="#" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-search"></span> Search
-        </a> -->
-      <!-- </p> -->
+          <a href="#" class="btn btn-info btn-lg">
+            <span class="glyphicon glyphicon-search"></span> Search
+          </a> -->
+          <!-- </p> -->
         </div>
       </form>
     </div>
   </div>
 
-
-  <div class="list-group" *ngFor="let item of lists | filter: searchText" [routerLink]="['/docdetails', item._id]">
+  <router-outlet></router-outlet>
+  <div class="list-group" *ngFor="let item of lists | filter: searchText" [routerLink]="['/details', item._id]">
     <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
       <div class="d-flex w-100 justify-content-between">
         <h5 class="mb-1">{{item.title}}</h5>
-        <h4 class="mb-1">{{item._id}}</h4>
         <small>3 days ago</small>
       </div>
       <p class="mb-1">{{item.description}}</p>

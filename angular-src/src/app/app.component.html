@@ -2,12 +2,15 @@
 <div style="text-align:left">
   <div class="container">
     <!-- <h1>
-      {{title}}!
-    </h1>
-    <a [routerLink]="['app-add-list']">Component One</a>
-    <a [routerLink]="['app-doc-details', 123]">Component Two (id: 123)</a>
+    {{title}}!
+  </h1> -->
+    <nav>
+      <a [routerLink]="['/list']">Component One</a>
+      <a [routerLink]="['/details', 123]">Component Two (id: 123)</a>
+      <!--<router-outlet></router-outlet>-->
+    </nav>
     <app-add-list></app-add-list>
     <!--<app-view-list> </app-view-list>-->
 
   </div>
-  </div>
+</div>
