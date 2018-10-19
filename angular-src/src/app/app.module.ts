@@ -9,17 +9,18 @@ import { ViewListComponent } from './view-list/view-list.component';
 import { ListService } from './services/list.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
+
 @NgModule({
 
   //Components are added here
   declarations: [
-    AppComponent,  
+    AppComponent,
     AddListComponent,
-    ViewListComponent 
+    ViewListComponent
   ],
   //All the modules are declared as imports
   imports: [
-  
+
     BrowserModule,
     HttpModule,
     FormsModule,
@@ -29,4 +30,5 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
   providers: [ListService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
