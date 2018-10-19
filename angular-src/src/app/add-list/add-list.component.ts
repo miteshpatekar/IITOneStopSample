@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { List } from '../models/List';
 import { ListService } from '../services/list.service';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-list',
@@ -11,8 +12,8 @@ export class AddListComponent implements OnInit {
   private newList: List;
   private lists: List[];
   @Output() addList: EventEmitter<List> = new EventEmitter<List>();
-  constructor(private listServ: ListService) { }
- 
+  constructor(private listServ: ListService, private router: Router) { }
+
   ngOnInit() {
   	//this.newList = {
   	//	title: '',
@@ -45,5 +46,12 @@ export class AddListComponent implements OnInit {
   		},
 	);
 
-	}
+  }
+
+  onClick() {
+    //this.router.navigate(['./', { outlets: { 'app-doc-details': [456] } }]);
+    //this.router.navigate(['/app-doc-details', 456]);
+    this.router.navigate(['app-doc-details', '456']);
+    //this.router.navigate(['customer', account.item.accountNumber]);
+  }
 }
