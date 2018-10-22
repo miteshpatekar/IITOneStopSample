@@ -14,16 +14,16 @@ export class ListService {
 
 
     public getAllLists():Observable<List[]> {
-      //let URI = `${this.serverApi}/iitsummaries/`;
-      let URI = `/iitsummaries/`;
+      let URI = `${this.serverApi}/iitsummaries/`;
+      //let URI = `/iitsummaries/`;
         return this.http.get(URI)
             .map(res => res.json())
             .map(res => <List[]>res.lists);
     }
 
     public deleteList(listId : string) {
-      //let URI = `${this.serverApi}/iitsummaries/${listId}`;
-      let URI = `/iitsummaries/${listId}`;
+      let URI = `${this.serverApi}/iitsummaries/${listId}`;
+      //let URI = `/iitsummaries/${listId}`;
         let headers = new Headers;
         headers.append('Content-Type', 'application/json');
         return this.http.delete(URI, {headers: headers})
@@ -31,8 +31,8 @@ export class ListService {
     }
 
     public get(listId : string):Observable<List> {
-      //let URI = `${this.serverApi}/iitsummaries/${listId}`;
-      let URI = `/iitsummaries/${listId}`;
+      let URI = `${this.serverApi}/iitsummaries/${listId}`;
+      //let URI = `/iitsummaries/${listId}`;
         let headers = new Headers;
         headers.append('Content-Type', 'application/json');
         return this.http.get(URI)
@@ -41,8 +41,8 @@ export class ListService {
     }
 
     	public addList(list: List) {
-        //  let URI = `${this.serverApi}/iitsummaries/`;
-          let URI = `/iitsummaries/`;
+         let URI = `${this.serverApi}/iitsummaries/`;
+         // let URI = `/iitsummaries/`;
   		let headers = new Headers;
   		 let body = JSON.stringify({title: list.title, description: list.description, category: list.category});
   		headers.append('Content-Type', 'application/json');
