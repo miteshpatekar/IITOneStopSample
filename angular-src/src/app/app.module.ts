@@ -17,8 +17,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     FormsModule,
     Ng2SearchPipeModule,
     RouterModule.forRoot([
-      { path: '', redirectTo: 'list', pathMatch: 'full' },
-      { path: 'list', component: AddListComponent,  },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'search', component: AddListComponent,  },
       { path: 'details/:id', component: DocDetailsComponent },
       { path: 'home',component:AboutComponent},
       { path: '**', redirectTo: 'home' }
