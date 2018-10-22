@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AddListComponent } from './add-list/add-list.component';
 import { DocDetailsComponent } from './doc-details/doc-details.component';
+import { AboutComponent } from './about/about.component';
 import { ListService } from './services/list.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
@@ -18,20 +19,22 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     RouterModule.forRoot([
       { path: '', redirectTo: 'list', pathMatch: 'full' },
       { path: 'list', component: AddListComponent,  },
-      { path: 'details/:id', component: DocDetailsComponent },    
+      { path: 'details/:id', component: DocDetailsComponent },
+      { path: 'home',component:AboutComponent},
       { path: '**', redirectTo: 'home' }
-    ]), 
+    ]),
   ],
   //Components are added here
   declarations: [
-    AppComponent,  
-    AddListComponent,
-    DocDetailsComponent
-  ],
-  //All the modules are declared as imports
- 
-  //All the services go here.
-  providers: [ListService],
-  bootstrap: [AppComponent]
+  AppComponent,
+  AddListComponent,
+  DocDetailsComponent,
+  AboutComponent
+],
+//All the modules are declared as imports
+
+//All the services go here.
+providers: [ListService],
+bootstrap: [AppComponent]
 })
 export class AppModule { }

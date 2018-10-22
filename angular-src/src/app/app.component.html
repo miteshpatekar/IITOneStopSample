@@ -1,9 +1,6 @@
 <!--The whole content below can be removed with the new code.-->
 <div style="text-align:left">
   <div class="container">
-    <!-- <h1>
-    {{title}}!
-  </h1> -->
   <!--Navbar-->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="#">IIT OneStop</a>
@@ -13,26 +10,15 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a [routerLink]="['/about']">Home</a>
-          <!-- <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pricing</a>
+          <a class="nav-link" [routerLink]="['/home']">Home</a>
         </li>
       </ul>
     </div>
   </nav>
-    <nav>
-      <!-- <a [routerLink]="['/list']">Component One</a> -->
+  <br>
+  <!-- <app-add-list></app-add-list> -->
+  <router-outlet></router-outlet>
+  <!--<app-view-list> </app-view-list>-->
 
-    </nav>
-    <br>
-    <!-- <app-add-list></app-add-list> -->
-    <router-outlet></router-outlet>
-    <!--<app-view-list> </app-view-list>-->
-
-  </div>
+</div>
 </div>
