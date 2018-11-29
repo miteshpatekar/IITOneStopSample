@@ -10,8 +10,8 @@ export class ListService {
 
     constructor(private http: Http) { }
 
-    //private serverApi= 'http://localhost:3000';
-    private serverApi= 'https://iitonestopdoc.azurewebsites.net/';
+    private serverApi= 'http://localhost:3000';
+    //private serverApi= 'https://iitonestopdoc.azurewebsites.net/';
 
 
     public getAllLists():Observable<List[]> {
@@ -42,7 +42,7 @@ export class ListService {
     }
 
     	public addList(list: List) {
-         let URI = `${this.serverApi}/iitsummaries/`;
+        let URI = `${this.serverApi}/iitsummaries/`;
          // let URI = `/iitsummaries/`;
   		let headers = new Headers;
   		 let body = JSON.stringify({title: list.title, description: list.description, category: list.category});

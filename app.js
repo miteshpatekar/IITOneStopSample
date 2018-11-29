@@ -13,6 +13,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const config = require('./config/database');
 const iitsummaries = require('./controllers/iitsummaries');
+//const authors = require('./controllers/authors');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -36,6 +37,7 @@ app.use('/', routes);
 app.use('/users', users);
 //Routing all HTTP requests to /iitsummaries to bucketlist controller
 app.use('/iitsummaries', iitsummaries);
+//app.use('/authors', authors);
 
 //Connect mongoose to our database
 mongoose.connect(config.database, { useNewUrlParser: true });

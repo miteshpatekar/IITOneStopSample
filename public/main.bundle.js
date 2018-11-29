@@ -57,7 +57,7 @@ var AboutComponent = (function () {
     return AboutComponent;
 }());
 AboutComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
         selector: 'app-about',
         template: __webpack_require__("./src/app/about/about.component.html"),
         styles: [__webpack_require__("./src/app/about/about.component.css")]
@@ -89,7 +89,7 @@ module.exports = module.exports.toString();
 /***/ "./src/app/add-list/add-list.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <form>\n        <div class=\"form-group\">\n          <br>\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n        </div>\n      </form>\n    </div>\n  </div>\n\n  <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\">\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.description}}</p>\n      <small>{{item.content}}</small>\n    </a>\n  </div>\n</div>\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-md-12\">\n      <form>\n        <div class=\"form-group\">\n          <br>\n          <input [(ngModel)]=\"searchText\"  name=\"searchDoc\" type=\"text\" id=\"search\" aria-describedby=\"searchDoc\" placeholder=\"Search\">\n          <span><i  class=\"fa fa-search search-icon\"></i></span>\n        </div>\n      </form>\n    </div>\n  </div>\n\n  <!-- <div class=\"list-group\" *ngFor=\"let item of lists | filter: searchText\"> -->\n    <div class=\"list-group\" *ngFor=\"let item of lists | myfilter: peopleFilter;\">\n    <a [routerLink]=\"['/details', item._id]\" class=\"list-group-item list-group-item-action flex-column align-items-start\">\n      <div class=\"d-flex w-100 justify-content-between\">\n        <h5 class=\"mb-1\">{{item.title}}</h5>\n        <!-- <a [routerLink]=\"['/details', item._id]\">{{item.title}}</a> -->\n      </div>\n      <p class=\"mb-1\">{{item.description}}</p>\n      <small>{{item.content}}</small>\n    </a>\n  </div>\n</div>\n"
 
 /***/ }),
 
@@ -100,6 +100,7 @@ module.exports = "<div class=\"container\">\n  <div class=\"row\">\n    <div cla
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("./node_modules/@angular/core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_list_service__ = __webpack_require__("./src/app/services/list.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("./node_modules/@angular/router/@angular/router.es5.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FilterPipe; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddListComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -113,6 +114,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+var FilterPipe = (function () {
+    function FilterPipe() {
+    }
+    FilterPipe.prototype.transform = function (items, filter) {
+        if (items == null)
+            return null;
+        return items.filter(function (item) {
+            var notMatchingField = Object.keys(filter)
+                .find(function (key) { return item[key] !== filter[key]; });
+            return !notMatchingField;
+        });
+    };
+    return FilterPipe;
+}());
+FilterPipe = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Y" /* Pipe */])({
+        name: 'myfilter'
+    })
+], FilterPipe);
+
 var AddListComponent = (function () {
     function AddListComponent(listServ, router) {
         this.listServ = listServ;
@@ -120,21 +141,14 @@ var AddListComponent = (function () {
         this.addList = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]();
     }
     AddListComponent.prototype.ngOnInit = function () {
-        //this.newList = {
-        //	title: '',
-        //	category:'',
-        //	description:'',
-        //	_id:''
-        //     }
         this.getList();
     };
     AddListComponent.prototype.getList = function () {
-        //Get all lists from server and update the lists property
-        //this.listServ.getAllLists().subscribe(
-        //  response => this.lists = response)
         var _this = this;
         this.listServ.getAllLists().subscribe(function (result) {
             _this.lists = result;
+            //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
+            _this.peopleFilter = {};
         }, function (error) { return console.error(error); });
     };
     AddListComponent.prototype.onSubmit = function () {
@@ -146,24 +160,21 @@ var AddListComponent = (function () {
         });
     };
     AddListComponent.prototype.onClick = function () {
-        //this.router.navigate(['./', { outlets: { 'app-doc-details': [456] } }]);
-        //this.router.navigate(['/app-doc-details', 456]);
         this.router.navigate(['app-doc-details', '456']);
-        //this.router.navigate(['customer', account.item.accountNumber]);
     };
     return AddListComponent;
 }());
 __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Output */])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Output */])(),
     __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["F" /* EventEmitter */]) === "function" && _a || Object)
 ], AddListComponent.prototype, "addList", void 0);
 AddListComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
         selector: 'app-add-list',
         template: __webpack_require__("./src/app/add-list/add-list.component.html"),
         styles: [__webpack_require__("./src/app/add-list/add-list.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__services_list_service__["a" /* ListService */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _c || Object])
 ], AddListComponent);
 
 var _a, _b, _c;
@@ -216,7 +227,7 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 AppComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
         selector: 'app-root',
         template: __webpack_require__("./src/app/app.component.html"),
         styles: [__webpack_require__("./src/app/app.component.css")]
@@ -260,6 +271,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+//import {} from './'
 var AppModule = (function () {
     function AppModule() {
     }
@@ -284,6 +296,7 @@ AppModule = __decorate([
         declarations: [
             __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["a" /* AddListComponent */],
+            __WEBPACK_IMPORTED_MODULE_6__add_list_add_list_component__["b" /* FilterPipe */],
             __WEBPACK_IMPORTED_MODULE_7__doc_details_doc_details_component__["a" /* DocDetailsComponent */],
             __WEBPACK_IMPORTED_MODULE_8__about_about_component__["a" /* AboutComponent */]
         ],
@@ -364,12 +377,12 @@ var DocDetailsComponent = (function () {
     return DocDetailsComponent;
 }());
 DocDetailsComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_0" /* Component */])({
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_1" /* Component */])({
         selector: 'app-doc-details',
         template: __webpack_require__("./src/app/doc-details/doc-details.component.html"),
         styles: [__webpack_require__("./src/app/doc-details/doc-details.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["c" /* ActivatedRoute */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__services_list_service__["a" /* ListService */]) === "function" && _b || Object])
 ], DocDetailsComponent);
 
 var _a, _b;
@@ -401,9 +414,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ListService = (function () {
     function ListService(http) {
         this.http = http;
-        //private serverApi= 'http://localhost:3000';
-        this.serverApi = 'https://iitonestopdoc.azurewebsites.net/';
+        this.serverApi = 'http://localhost:3000';
     }
+    //private serverApi= 'https://iitonestopdoc.azurewebsites.net/';
     ListService.prototype.getAllLists = function () {
         var URI = this.serverApi + "/iitsummaries/";
         //let URI = `/iitsummaries/`;

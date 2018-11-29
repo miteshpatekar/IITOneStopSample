@@ -1,7 +1,21 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Pipe, PipeTransform } from '@angular/core';
 import { List } from '../models/List';
 import { ListService } from '../services/list.service';
 import { Router,ActivatedRoute } from '@angular/router';
+
+@Pipe({
+    name: 'myfilter'
+})
+export class FilterPipe implements PipeTransform {
+    transform(items: List[], filter: {[key: string]: any }): List[] {
+      if(items==null) return null;
+        return items.filter(item => {
+                let notMatchingField = Object.keys(filter)
+                                             .find(key => item[key] !== filter[key]);
+                return !notMatchingField;
+            });
+    }
+}
 
 @Component({
   selector: 'app-add-list',
@@ -10,29 +24,22 @@ import { Router,ActivatedRoute } from '@angular/router';
 })
 export class AddListComponent implements OnInit {
   private newList: List;
-  private lists: List[];
+  lists: List[];
+  peopleFilter: any;
   @Output() addList: EventEmitter<List> = new EventEmitter<List>();
-  constructor(private listServ: ListService, private router: Router) { }
+  constructor(private listServ: ListService, private router: Router) {
+  }
 
   ngOnInit() {
-  	//this.newList = {
-  	//	title: '',
-  	//	category:'',
-  	//	description:'',
-  	//	_id:''
-
-   //     }
     this.getList();
 
   }
 
   public getList() {
-    //Get all lists from server and update the lists property
-    //this.listServ.getAllLists().subscribe(
-    //  response => this.lists = response)
-
     this.listServ.getAllLists().subscribe(result => {
       this.lists = result;
+    //  this.peopleFilter = {title:'Stand Up for Learning' , doctype: 'Newspaper'};
+      this.peopleFilter={};
     }, error => console.error(error));
   }
 
@@ -49,9 +56,6 @@ export class AddListComponent implements OnInit {
   }
 
   onClick() {
-    //this.router.navigate(['./', { outlets: { 'app-doc-details': [456] } }]);
-    //this.router.navigate(['/app-doc-details', 456]);
     this.router.navigate(['app-doc-details', '456']);
-    //this.router.navigate(['customer', account.item.accountNumber]);
   }
 }
